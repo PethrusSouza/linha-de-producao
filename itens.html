@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema OS - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Gestão de Produção</h2>
+        <nav>
+            <a href="index.html">Ordens de Serviço</a>
+            <a href="itens.html">Itens/Produtos</a>
+            <a href="usuarios.html">Usuários</a>
+        </nav>
+    </div>
+
+<div class="main-content">
+    <h1>Cadastro de Itens</h1>
+    <div class="card">
+        <form>
+            <div class="form-group">
+                <label>Nome do Item</label>
+                <input type="text" required>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group">
+                    <label>P_12 (Qtd/Peso)</label>
+                    <input type="number">
+                </div>
+                <div class="form-group">
+                    <label>Medidas</label>
+                    <select>
+                        <option>BL</option>
+                        <option>TL</option>
+                        <option>M²</option>
+                        <option>CM</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Acabamento</label>
+                <input type="text">
+            </div>
+            <button type="submit">Salvar Item</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

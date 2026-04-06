@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema OS - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Gestão de Produção</h2>
+        <nav>
+            <a href="index.html">Ordens de Serviço</a>
+            <a href="itens.html">Itens/Produtos</a>
+            <a href="usuarios.html">Usuários</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <h1>Gestão de Ordens de Serviço</h1>
+        
+        <div class="card">
+            <h3>Nova Ordem de Serviço</h3>
+            <form>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                    <div class="form-group">
+                        <label>Nº Pedido</label>
+                        <input type="text" placeholder="Ex: OS-2024-001">
+                    </div>
+                    <div class="form-group">
+                        <label>Cliente</label>
+                        <select>
+                            <option>Selecione um cliente (cad_clientes)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select>
+                            <option>EM_PRODUCAO</option>
+                            <option>FINALIZADA</option>
+                            <option>NF_EMITIDA</option>
+                            <option>ENTREGUE</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit">Gerar Ordem</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h3>Pedidos Recentes</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nº Pedido</th>
+                        <th>Cliente</th>
+                        <th>Status</th>
+                        <th>Data Criação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>OS-001</td>
+                        <td>Cliente Exemplo</td>
+                        <td><span style="color: orange;">EM_PRODUCAO</span></td>
+                        <td>05/04/2026</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
