@@ -49,6 +49,12 @@ body {
     width: calc(100% - 250px);
 }
 
+.main-content2 {
+    margin-left: 65px;
+    padding: 30px;
+    width: calc(100% - 250px);
+}
+
 .card {
     background: white;
     padding: 20px;
