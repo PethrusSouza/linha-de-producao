@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Sistema de Gestão</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
     <style>
         /* Estilos específicos para centralizar o login */
         body {
@@ -110,7 +110,7 @@
         localStorage.setItem("usuario", usuario);
 
         if (usuario === "admin" && senha === "123") {
-        window.location.href = "dashboard.html";
+        window.location.href = "/dashboard/";
         } else {
             alert("Usuário ou senha inválidos!");
         }

@@ -2,36 +2,36 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Sistema OS - Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Sistema OS - Itens</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <div class="sidebar">
         <h2>Gestão de Produção</h2>
         <nav>
-            <a href="dashboard.html">Ordens de Serviço</a>
-            <a href="itens.html">Itens/Produtos</a>
-            <a href="usuarios.html">Usuários</a>
-            <a href="index.html">SAIR</a>
+            <a href="/dashboard/">Ordens de Serviço</a>
+            <a href="/itens/">Itens/Produtos</a>
+            <a href="/usuarios/">Usuários</a>
+            <a href="/">SAIR</a>
         </nav>
     </div>
 
 <div class="main-content">
     <h1>Cadastro de Itens</h1>
     <div class="card">
-        <form>
+        <form id="item-form">
             <div class="form-group">
                 <label>Nome do Item</label>
-                <input type="text" required>
+                <input id="nome" type="text" required>
             </div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                 <div class="form-group">
                     <label>P_12 (Qtd/Peso)</label>
-                    <input type="number">
+                    <input id="p_12" type="number">
                 </div>
                 <div class="form-group">
                     <label>Medidas</label>
-                    <select>
+                    <select id="medidas">
                         <option>BL</option>
                         <option>TL</option>
                         <option>M²</option>
@@ -41,15 +41,82 @@
             </div>
             <div class="form-group">
                 <label>Descrição</label>
-                <textarea rows="3"></textarea>
+                <textarea id="descricao_item" rows="3" required></textarea>
             </div>
             <div class="form-group">
                 <label>Acabamento</label>
-                <input type="text">
+                <input id="acabamento" type="text" required>
             </div>
             <button type="submit">Salvar Item</button>
         </form>
     </div>
+
+    <div class="card">
+        <h3>Itens cadastrados</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>P_12</th>
+                    <th>Medidas</th>
+                    <th>Descrição</th>
+                    <th>Acabamento</th>
+                </tr>
+            </thead>
+            <tbody id="itens-tabela"></tbody>
+        </table>
+    </div>
 </div>
+
+<script>
+async function carregarItens() {
+    const response = await fetch('/api/itens/');
+    const itens = await response.json();
+    const tbody = document.getElementById('itens-tabela');
+    tbody.innerHTML = '';
+
+    itens.forEach((item) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${item.id}</td>
+            <td>${item.nome}</td>
+            <td>${item.p_12 ?? ''}</td>
+            <td>${item.medidas}</td>
+            <td>${item.descricao_item}</td>
+            <td>${item.acabamento}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+document.getElementById('item-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const payload = {
+        nome: document.getElementById('nome').value,
+        p_12: document.getElementById('p_12').value || null,
+        medidas: document.getElementById('medidas').value,
+        descricao_item: document.getElementById('descricao_item').value,
+        acabamento: document.getElementById('acabamento').value
+    };
+
+    const response = await fetch('/api/itens/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+        alert('Item cadastrado com sucesso!');
+        event.target.reset();
+        carregarItens();
+    } else {
+        alert('Erro ao cadastrar item.');
+    }
+});
+
+carregarItens();
+</script>
 </body>
 </html>
